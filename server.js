@@ -158,6 +158,13 @@ app.post("/process", async (req, res) => {
   }
 });
 
+// Serve static files (e.g., CSS, JS, images) from the 'public' folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Serve the homepage at the root URL
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "courseschecker.html"));
+});
 // ------------------------------------------------------------------
 // API Endpoint: /verify (optional) to verify payment via Paystack
 app.get("/verify", async (req, res) => {
