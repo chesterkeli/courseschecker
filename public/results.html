@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Find the best university courses based on your qualifications." />
+  <meta name="keywords" content="KUCCPS, courses, university, eligibility, education, degree, career" />
+  <meta name="author" content="Courses Checker" />
+  <title>Eligible Courses</title>
+
+  <!-- Include jsPDF Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
+   /* General Page Styling */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #1a1a1a, #bfa76f);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+  margin: 0;
+  padding: 20px;
+  color: #d3d3d3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Main Container */
+.results-container {
+  max-width: 1000px;
+  width: 100%;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(26, 26, 26, 0.7); /* Frosted Glass Effect */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(179, 157, 219, 0.5); /* Soft Purple Glow */
+}
+
+/* Individual University Box */
+.university-box {
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border: 2px solid #b39ddb; /* Soft Purple Border */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Alternating muted green background colors */
+.university-box:nth-child(odd) {
+  background-color: #2e604a; /* Muted Dark Green */
+}
+
+.university-box:nth-child(even) {
+  background-color: #3f7b5e; /* Muted Medium Green */
+}
+
+/* Floating hover effect */
+.university-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(179, 157, 219, 0.7);
+}
+
+/* University Title */
+.university-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #b39ddb;
+  padding-bottom: 8px;
+}
+
+/* Course List Container */
+.course-list {
+  margin-top: 10px;
+}
+
+/* Individual Course Entry */
+.course-entry {
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-left: 5px solid #00ffcc; /* Neon Green Left Border */
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Hover effect on courses */
+.course-entry:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
+}
+
+/* Course Title */
+.course-title {
+  font-size: 21px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Course Details */
+.course-details {
+  font-size: 16px;
+  color: #d3d3d3;
+  padding: 6px 0;
+}
+
+/* Apply Button */
+.apply-button {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background-color: #00ffcc; /* Neon Teal */
+  color: #000;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 10px;
+}
+
+.apply-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00ffcc, 0 0 30px #00ffcc;
+  text-shadow: 0 0 10px #00ffcc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .results-container {
+    width: 95%;
+  }
+}
+/* General styling */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #1a1a1a, #bfa76f);
+  color: #d3d3d3;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Results container */
+.results-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Individual course card */
+.course-card {
+  width: 450px;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  color: #1a1a1a;
+  font-weight: bold;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Hover effect */
+.course-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(255, 255, 255, 0.3);
+}
+
+/* Background color cycling */
+.course-card:nth-child(10n+1) { background-color: #a8d5ba; }
+.course-card:nth-child(10n+2) { background-color: #f7c59f; }
+.course-card:nth-child(10n+3) { background-color: #d4a5a5; }
+.course-card:nth-child(10n+4) { background-color: #92a8d1; }
+.course-card:nth-child(10n+5) { background-color: #ffdb58; }
+.course-card:nth-child(10n+6) { background-color: #b39ddb; }
+.course-card:nth-child(10n+7) { background-color: #ff9a8b; }
+.course-card:nth-child(10n+8) { background-color: #b5e7a0; }
+.course-card:nth-child(10n+9) { background-color: #f4a261; }
+.course-card:nth-child(10n+10) { background-color: #98ddca; }
+
+/* University name styling */
+.course-card h3 {
+  margin-bottom: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+/* Course details styling */
+.course-card p {
+  margin: 5px 0;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .course-card {
+    width: 90%;
+  }
+}
+  </style>
+</head>
+<body>
+  <h2>Courses You Qualify For</h2>
+  <div id="courses"></div>
+
+  <!-- Download PDF Button -->
+  <button id="download-btn" class="download-btn">Download Courses (PDF)</button>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // ✅ Fetch courses from localStorage (if available)
+      const storedCourses = localStorage.getItem("eligibleCourses");
+
+      if (storedCourses) {
+        try {
+          const courses = JSON.parse(storedCourses);
+          displayCourses(courses);
+          return;
+        } catch (error) {
+          console.error("❌ Error parsing stored courses:", error);
+        }
+      }
+
+      // ✅ Get cutoff points from URL (if needed)
+      function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+      const cutoffPoints = getQueryParam("cutoff") || "";
+
+      // ✅ Fetch data from the server
+      fetch(`/results-data?cutoff=${cutoffPoints}`)
+        .then(response => response.json())
+        .then(data => {
+          if (!data.courses || !Array.isArray(data.courses) || data.courses.length === 0) {
+            document.getElementById("courses").innerHTML = "<p>No eligible courses found.</p>";
+            return;
+          }
+          displayCourses(data.courses);
+        })
+        .catch(error => {
+          console.error("❌ Error fetching course data:", error);
+          document.getElementById("courses").innerHTML = '<p>Error loading courses.</p>';
+        });
+
+      // ✅ Function to display courses
+      function displayCourses(courses) {
+        const coursesDiv = document.getElementById("courses");
+        coursesDiv.innerHTML = "";
+
+        courses.forEach(course => {
+          const courseCard = document.createElement("div");
+          courseCard.className = "course-card";
+          courseCard.innerHTML = `
+            <strong>${course["PROGRAMME NAME"] || "N/A"}</strong><br>
+            University: ${course["INSTITUTION NAME"] || "Unknown"} <br>
+            Minimum Points: ${course["2023 CUTOFF"] ?? "Not specified"} <br>
+            Program Code: ${course["PROG CODE"] || "N/A"}
+          `;
+          coursesDiv.appendChild(courseCard);
+        });
+      }
+
+      // ✅ PDF Download Feature
+      document.getElementById("download-btn").addEventListener("click", function () {
+        const courses = JSON.parse(localStorage.getItem("eligibleCourses")) || [];
+
+        if (courses.length === 0) {
+          alert("No courses available for download.");
+          return;
+        }
+
+        // Initialize jsPDF
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        // Set title
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(18);
+        doc.text("Eligible Courses", 20, 20);
+
+        // Table headers
+        doc.setFontSize(12);
+        let y = 40;
+        doc.text("Course Name", 20, y);
+        doc.text("University", 120, y);
+        doc.line(20, y + 2, 190, y + 2); // Draw line below headers
+        y += 10;
+
+        // Add courses to the PDF
+        doc.setFont("helvetica", "normal");
+        courses.forEach(course => {
+          doc.text(course["PROGRAMME NAME"] || "N/A", 20, y);
+          doc.text(course["INSTITUTION NAME"] || "Unknown", 120, y);
+          y += 10;
+        });
+
+        // Save the PDF
+        doc.save("Eligible_Courses.pdf");
+      });
+
+    });
+  </script>
+</body>
+</html>

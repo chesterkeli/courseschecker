@@ -1,0 +1,147 @@
+/* General page styling with animated gradient background */
+body {
+  background: linear-gradient(135deg, #1a1a1a, #bfa76f);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #d3d3d3; /* Light grey text */
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Styling for the form container (Glassmorphism effect) */
+#paymentForm {
+  max-width: 400px;
+  padding: 30px;
+  background: rgba(26, 26, 26, 0.7); /* Semi-transparent dark overlay */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  border-radius: 12px;
+  border: 2px solid #b39ddb; /* Soft purple border */
+  box-shadow: 0 4px 12px rgba(179, 157, 219, 0.5); /* Soft purple glow */
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Add spacing between form elements */
+}
+
+/* Floating effect for form */
+#paymentForm:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(179, 157, 219, 0.7);
+}
+
+/* Centered labels with extra spacing */
+label {
+  display: block;
+  font-weight: bold;
+  color: #d3d3d3;
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 10px; /* Added more space below labels */
+}
+
+/* Styling for input fields with extra spacing */
+input[type="email"],
+input[type="tel"],
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #333;
+  color: #d3d3d3;
+  border: 1px solid #b39ddb; /* Soft purple border */
+  border-radius: 6px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 20px; /* Extra spacing between inputs */
+}
+
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="text"]:focus {
+  border-color: #b39ddb;
+  box-shadow: 0 0 8px rgba(179, 157, 219, 0.6);
+  outline: none;
+}
+
+/* Neon teal button with glowing hover effect and extra spacing */
+button[type="submit"] {
+  width: 100%;
+  background-color: #00ffcc; /* Neon teal */
+  color: #000;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, text-shadow 0.3s ease;
+  margin-top: 20px; /* Extra spacing above the button */
+}
+
+button[type="submit"]:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffcc;
+  text-shadow: 0 0 10px #00ffcc;
+}
+
+/* Warning message styling: warm orange */
+.warning {
+  color: #ff8c00;
+  background: rgba(255, 140, 0, 0.1);
+  padding: 10px;
+  border: 1px solid #ff8c00;
+  border-radius: 4px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Success message styling: neon green */
+.success {
+  color: #39ff14;
+  background: rgba(57, 255, 20, 0.1);
+  padding: 10px;
+  border: 1px solid #39ff14;
+  border-radius: 4px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Floating effect for messages */
+.warning, .success {
+  animation: floatEffect 1.5s infinite alternate;
+}
+
+@keyframes floatEffect {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(5px); }
+}
+
+/* Scroll Reveal Animation (Fade In Effect) */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  #paymentForm {
+    width: 90%;
+  }
+}

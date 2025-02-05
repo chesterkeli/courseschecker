@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <form id="paymentForm">
+    <div class="form-group">
+      <label for="email">Enter Your Email</label>
+      <input type="email" id="email-address" required />
+    </div>
+    <div class="form-group">
+      <label for="kcse-index">Enter Your KCSE Index Number</label>
+      <input type="text" id="kcse-index" required />
+    </div>
+    <div class="form-submit">
+      <button type="submit">Proceed to Payment</button>
+    </div>
+  </form>
+
+  <!-- Include Paystack inline script -->
+  <script src="https://js.paystack.co/v1/inline.js"></script> 
+  <!-- Include your payment.js file -->
+  <script src="payment.js"></script>
+  
+  <script>
+    // Attach a submit event listener to the payment form.
+    const paymentForm = document.getElementById('paymentForm');
+    paymentForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      payWithPaystack(e);
+    }, false);
+
+    // In paystack.html, you can retrieve the data like this:
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    if (userData) {
+      console.log("Retrieved user data:", userData);
+      
+      // Proceed with payment process or further logic
+    } else {
+      console.error("User data not found or corrupted.");
+      // Handle missing data or error
+    }
+  </script>
+</body>
+</html>
